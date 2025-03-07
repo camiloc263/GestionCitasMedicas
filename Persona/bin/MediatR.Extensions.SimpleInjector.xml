@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MediatR.Extensions.SimpleInjector</name>
+    </assembly>
+    <members>
+        <member name="T:MediatR.Extensions.SimpleInjector.ContainerExtension">
+            <summary>
+            Extensions to scan for MediatR handlers and registers them in SimpleInjector.
+            - Scans for any handler interface implementations and registers them as <see cref="F:SimpleInjector.Lifestyle.Transient"/>
+            - Scans for any
+              <see cref="T:MediatR.Pipeline.IRequestPreProcessor`1"/>
+              <see cref="T:MediatR.Pipeline.IRequestPostProcessor`2"/>
+              <see cref="T:MediatR.Pipeline.IRequestExceptionHandler`3"/>
+              <see cref="T:MediatR.Pipeline.IRequestExceptionAction`2"/>
+              implementations and registers them as <see cref="F:SimpleInjector.Lifestyle.Transient"/> instances
+            Registers <see cref="T:MediatR.ServiceFactory"/> and <see cref="T:MediatR.IMediator"/> as <see cref="F:SimpleInjector.Lifestyle.Singleton"/> instances
+            After calling AddMediatR you can use the container to resolve an <see cref="T:MediatR.IMediator"/> instance.
+            This scans for any <see cref="T:MediatR.IPipelineBehavior`2"/>
+            instances and also if flags for builtin processor behavior are enabled scans for
+            <see cref="T:MediatR.Pipeline.RequestPreProcessorBehavior`2"/>
+            <see cref="T:MediatR.Pipeline.RequestPostProcessorBehavior`2"/>
+            <see cref="T:MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2"/>
+            <see cref="T:MediatR.Pipeline.RequestExceptionProcessorBehavior`2"/>.
+            To register behaviors, use method with the open generic or closed generic types.
+            <code>container.Register&lt;Type, Type&gt;();</code>
+            </summary>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.ContainerExtension.AddMediatR(SimpleInjector.Container,System.Reflection.Assembly[])">
+            <summary>
+            Registers handlers and mediator types from the specified assemblies.
+            </summary>
+            <param name="container"><see cref="T:SimpleInjector.Container"/>.</param>
+            <param name="assemblies">Assemblies to scan.</param>
+            <returns><see cref="T:SimpleInjector.Container"/>.</returns>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.ContainerExtension.AddMediatR(SimpleInjector.Container,System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
+            <summary>
+            Registers handlers and mediator types from the specified assemblies.
+            </summary>
+            <param name="container"><see cref="T:SimpleInjector.Container"/>.</param>
+            <param name="assemblies">Assemblies to scan.</param>
+            <returns><see cref="T:SimpleInjector.Container"/>.</returns>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.ContainerExtension.AddMediatR(SimpleInjector.Container,System.Type[])">
+            <summary>
+            Registers handlers and mediator types from the assemblies that contain the specified types.
+            </summary>
+            <param name="container"><see cref="T:SimpleInjector.Container"/>.</param>
+            <param name="handlerAssemblyMarkerTypes">Types used to mark assemblies to scan.</param>.
+            <returns><see cref="T:SimpleInjector.Container"/>.</returns>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.ContainerExtension.AddMediatR(SimpleInjector.Container,System.Collections.Generic.IEnumerable{System.Type})">
+            <summary>
+            Registers handlers and mediator types from the assemblies that contain the specified types.
+            </summary>
+            <param name="container"><see cref="T:SimpleInjector.Container"/>.</param>
+            <param name="handlerAssemblyMarkerTypes">Types used to mark assemblies to scan.</param>
+            <returns><see cref="T:SimpleInjector.Container"/>.</returns>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.ContainerExtension.AddMediatR(SimpleInjector.Container,System.Action{MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration})">
+            <summary>
+            Registers handlers and mediator types from the specified assemblies.
+            </summary>
+            <param name="container"><see cref="T:SimpleInjector.Container"/>.</param>
+            <param name="configuration">The action used to configure the options.</param>
+            <returns><see cref="T:SimpleInjector.Container"/>.</returns>
+        </member>
+        <member name="T:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration">
+            <summary>
+            MediatR SimpleInjector configuration file.
+            </summary>
+        </member>
+        <member name="P:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.MediatorImplementationType">
+            <summary>
+            Custom implementation of <see cref="T:MediatR.IMediator"/>.
+            Default is <see cref="T:MediatR.Mediator"/>.
+            </summary>
+        </member>
+        <member name="P:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.Lifestyle">
+            <summary>
+            Lifestyle in which IMediator implementation will be registered.
+            Default is <see cref="P:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.Lifestyle"/>.Singleton.
+            </summary>
+        </member>
+        <member name="P:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.RequestPreProcessorBehaviorEnabled">
+            <summary>
+            Flag which indicates if default implementation
+            <see cref="T:MediatR.Pipeline.RequestPreProcessorBehavior`2"/> should be registered
+            and all implementations of <see cref="T:MediatR.Pipeline.IRequestPreProcessor`1"/>.
+            </summary>
+        </member>
+        <member name="P:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.RequestPostProcessorBehaviorEnabled">
+            <summary>
+            Flag which indicates if default implementation
+            <see cref="T:MediatR.Pipeline.RequestPostProcessorBehavior`2"/> should be registered
+            and all implementations of <see cref="T:MediatR.Pipeline.IRequestPostProcessor`2"/>.
+            </summary>
+        </member>
+        <member name="P:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.RequestExceptionProcessorBehaviorEnabled">
+            <summary>
+            Flag which indicates if default implementation
+            <see cref="T:MediatR.Pipeline.RequestExceptionProcessorBehavior`2"/> should be registered
+            and all implementations of <see cref="T:MediatR.Pipeline.IRequestExceptionHandler`3"/>.
+            </summary>
+        </member>
+        <member name="P:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.RequestExceptionActionProcessorBehaviorEnabled">
+            <summary>
+            Flag which indicates if default implementation
+            <see cref="T:MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2"/> should be registered
+            and all implementations of <see cref="T:MediatR.Pipeline.IRequestExceptionAction`2"/>.
+            </summary>
+        </member>
+        <member name="P:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.AssembliesToScan">
+            <summary>
+            Assemblies which will be scanned for
+            auto registering types implementing MediatR interfaces.
+            </summary>
+        </member>
+        <member name="P:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.PipelineBehaviorTypes">
+            <summary>
+            Custom implementations of <see cref="T:MediatR.IPipelineBehavior`2"/>.
+            </summary>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.Using``1">
+            <summary>
+            Register custom implementation of <see cref="T:MediatR.IMediator"/> type
+            instead of default one <see cref="T:MediatR.Mediator"/>.
+            </summary>
+            <typeparam name="TMediator">Custom <see cref="T:MediatR.IMediator"/> implementation.</typeparam>
+            <returns><see cref="T:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration"/>
+            with custom <see cref="T:MediatR.IMediator"/> implementation.</returns>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.AsSingleton">
+            <summary>
+            Set lifestyle of custom or default
+            <see cref="T:MediatR.IMediator"/> implementation to <see cref="P:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.Lifestyle"/>.Singleton.
+            </summary>
+            <returns><see cref="T:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration"/>
+            with <see cref="T:MediatR.IMediator"/> implementation to <see cref="P:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.Lifestyle"/>.Singleton.</returns>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.AsScoped">
+            <summary>
+            Set lifestyle of custom or default
+            <see cref="T:MediatR.IMediator"/> implementation to <see cref="P:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.Lifestyle"/>.Scoped.
+            </summary>
+            <returns><see cref="T:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration"/>
+            with <see cref="T:MediatR.IMediator"/> implementation to <see cref="P:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.Lifestyle"/>.Scoped.</returns>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.AsTransient">
+            <summary>
+            Set lifestyle of custom or default
+            <see cref="T:MediatR.IMediator"/> implementation to <see cref="P:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.Lifestyle"/>.Transient.
+            </summary>
+            <returns><see cref="T:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration"/>
+            with <see cref="T:MediatR.IMediator"/> implementation to <see cref="P:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.Lifestyle"/>.Transient.</returns>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.WithAssembliesToScan(System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
+            <summary>
+            Setup assemblies which will be scanned for
+            auto registering types implementing MediatR interfaces.
+            </summary>
+            <param name="assembliesToScan">Assemblies which will be scanned for
+            auto registering types.</param>
+            <returns><see cref="T:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration"/>
+            with assemblies to scan configured.</returns>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.WithHandlerAssemblyMarkerTypes(System.Type[])">
+            <summary>
+            Setup assemblies which will be scanned for
+            auto registering types implementing MediatR interfaces
+            by types from given assemblies (marker types).
+            </summary>
+            <param name="handlerAssemblyMarkerTypes">Types from assemblies which will be scanned for
+            auto registering types.</param>
+            <returns><see cref="T:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration"/>
+            with assemblies to scan configured.</returns>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.WithHandlerAssemblyMarkerTypes(System.Collections.Generic.IEnumerable{System.Type})">
+            <summary>
+            Setup assemblies which will be scanned for
+            auto registering types implementing MediatR interfaces
+            by types from given assemblies (marker types).
+            </summary>
+            <param name="handlerAssemblyMarkerTypes">Types from assemblies which will be scanned for
+            auto registering types.</param>
+            <returns><see cref="T:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration"/>
+            with assemblies to scan configured.</returns>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.UsingBuiltinPipelineProcessorBehaviors(System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Setup flags which indicates which default behaviors and processors should be registered.
+            Default is all false.
+            </summary>
+            <param name="requestPreProcessorBehaviorEnabled">Flag which indicates if default implementation
+            <see cref="T:MediatR.Pipeline.RequestPreProcessorBehavior`2"/> should be registered
+            and all implementations of <see cref="T:MediatR.Pipeline.IRequestPreProcessor`1"/>.</param>
+            <param name="requestPostProcessorBehaviorEnabled">Flag which indicates if default implementation
+            <see cref="T:MediatR.Pipeline.RequestPostProcessorBehavior`2"/> should be registered
+            and all implementations of <see cref="T:MediatR.Pipeline.IRequestPostProcessor`2"/>.</param>
+            <param name="requestExceptionProcessorBehaviorEnabled">Flag which indicates if default implementation
+            <see cref="T:MediatR.Pipeline.RequestExceptionProcessorBehavior`2"/> should be registered
+            and all implementations of <see cref="T:MediatR.Pipeline.IRequestExceptionHandler`3"/>.</param>
+            <param name="requestExceptionActionProcessorBehaviorEnabled">Flag which indicates if default implementation
+            <see cref="T:MediatR.Pipeline.RequestExceptionActionProcessorBehavior`2"/> should be registered
+            and all implementations of <see cref="T:MediatR.Pipeline.IRequestExceptionAction`2"/>.</param>
+            <returns><see cref="T:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration"/>
+            with flags for behavior configured.</returns>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.UsingBuiltinPipelineProcessorBehaviors(System.Boolean)">
+            <summary>
+            Setup flag which indicates if all behaviors and processors should be registered.
+            Default is false.
+            </summary>
+            <param name="processorBehaviorEnabled">Flag which enable all behaviors and processors at once.</param>
+            <returns><see cref="T:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration"/>
+            with flags for behavior configured.</returns>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.UsingPipelineProcessorBehaviors(System.Collections.Generic.IEnumerable{System.Type})">
+            <summary>
+            Setup additional custom implementations of <see cref="T:MediatR.IPipelineBehavior`2"/>.
+            </summary>
+            <param name="pipelineBehaviorTypes"><see cref="T:MediatR.IPipelineBehavior`2"/> implementation types.</param>
+            <returns><see cref="T:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration"/>
+            with <see cref="T:MediatR.IPipelineBehavior`2"/> implementation types configured.</returns>
+        </member>
+        <member name="M:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration.UsingPipelineProcessorBehaviors(System.Type[])">
+            <summary>
+            Setup additional custom implementations of <see cref="T:MediatR.IPipelineBehavior`2"/>.
+            </summary>
+            <param name="pipelineBehaviorTypes"><see cref="T:MediatR.IPipelineBehavior`2"/> implementation types.</param>
+            <returns><see cref="T:MediatR.Extensions.SimpleInjector.MediatRSimpleInjectorConfiguration"/>
+            with <see cref="T:MediatR.IPipelineBehavior`2"/> implementation types configured.</returns>
+        </member>
+    </members>
+</doc>
